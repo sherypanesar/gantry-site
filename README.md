@@ -20,7 +20,7 @@ Option A — add it to the existing `gantry-legal` Pages repo:
 Option B — a dedicated `gantry` repo:
 1. Create a public repo named `gantry`, drop these files in the root, enable Pages
    (Settings → Pages → deploy from `main`/root).
-2. Site goes live at `https://sherypanesar.github.io/gantry/` (already set as the canonical URL).
+2. Site goes live at `https://sherypanesar.github.io/gantry-site/` (already set as the canonical URL).
 
 > A custom domain (e.g. `gantry.app`) can be pointed at Pages later via a `CNAME` file.
 
