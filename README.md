@@ -1,6 +1,6 @@
 # Gantry — marketing site
 
-**🟢 LIVE at https://sherypanesar.github.io/gantry-site/** (published 2026-07-23).
+**🟢 LIVE at https://gantrycnc.com/** (published 2026-07-23).
 
 Single-page marketing site for Gantry + the guides blog. This is the **"link home"** for the
 Product Hunt link, link-in-bio, and the SEO articles. Self-contained, dark-themed to match the app.
@@ -27,8 +27,8 @@ of truth stays here in `cnc-control/marketing-site/`; it was published as that r
 3. GitHub Pages rebuilds in ~1–2 min. (Check: `gh api repos/sherypanesar/gantry-site/pages/builds/latest --jq .status`.)
 
 ## Notes
-- Canonical + OG URLs point at `https://sherypanesar.github.io/gantry-site/`.
-- A custom domain (e.g. `gantry.app`) can be added later via a `CNAME` file + DNS.
+- Canonical + OG URLs point at `https://gantrycnc.com/`.
+- Custom domain **`gantrycnc.com`** is live via the `CNAME` file here + Cloudflare DNS (apex A-records → GitHub Pages, `www` CNAME → `sherypanesar.github.io`).
 - All Play links carry UTM `referrer` params (`utm_source=site`) so installs show in Play
   Console acquisition reports.
 - Pack prices in the pricing section mirror `frontend/src/lib/entitlements.ts` — update here if
