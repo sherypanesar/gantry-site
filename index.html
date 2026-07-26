@@ -37,140 +37,222 @@
   :root{
     --bg:#ffffff; --bg2:#f2f6fc; --panel:#ffffff; --panel2:#f7f9fd; --edge:#e4e9f1;
     --fg:#141b26; --body:#39434f; --muted:#57616f; --dim:#8a94a3;
-    --blue:#2563eb; --blue2:#1d4ed8; --cyan:#0e7490; --orange:#ea580c;
+    --blue:#2563eb; --blue2:#1d4ed8; --cyan:#0e7490; --green:#0f9d58; --orange:#ea580c;
     --shadow:0 18px 50px -24px rgba(20,30,50,.28);
+    --shadow-lg:0 40px 90px -40px rgba(20,30,50,.42);
     --maxw:1120px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    margin:0; background:var(--bg); color:#39434f;
+    margin:0; background:var(--bg); color:var(--body);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.6; -webkit-font-smoothing:antialiased;
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:clip;
   }
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  h1,h2,h3{line-height:1.15;margin:0;color:var(--fg)}
+  h1,h2,h3{line-height:1.14;margin:0;color:var(--fg)}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 
-  /* buttons */
+  /* ---- scroll reveal ---- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* ---- buttons ---- */
   .btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:12px;
-       padding:14px 22px;font-size:16px;transition:transform .12s ease,box-shadow .12s ease;cursor:pointer;border:1px solid transparent}
-  .btn-play{background:var(--blue);color:#fff;box-shadow:0 10px 28px -10px rgba(37,99,235,.6)}
-  .btn-play:hover{transform:translateY(-2px);background:var(--blue2)}
+       padding:14px 22px;font-size:16px;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;cursor:pointer;border:1px solid transparent}
+  .btn-play{background:var(--blue);color:#fff;box-shadow:0 12px 30px -10px rgba(37,99,235,.6)}
+  .btn-play:hover{transform:translateY(-2px);background:var(--blue2);box-shadow:0 18px 40px -12px rgba(37,99,235,.7)}
   .btn-ghost{border-color:var(--edge);color:var(--fg);background:#fff}
   .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
-  .tri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #fff}
+  .gplay{display:flex;flex-direction:column;line-height:1.05;align-items:flex-start}
+  .gplay small{font-size:11px;font-weight:600;opacity:.85;letter-spacing:.3px}
+  .gplay b{font-size:17px;font-weight:800}
+  .pmark{font-size:20px}
 
-  /* nav */
-  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
-      background:rgba(255,255,255,.85);border-bottom:1px solid var(--edge)}
+  /* ---- nav ---- */
+  nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(12px);
+      background:rgba(255,255,255,.82);border-bottom:1px solid var(--edge)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.3px;color:var(--fg)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:.3px;color:var(--fg)}
   .brand img{width:34px;height:34px;border-radius:9px}
   nav .links{display:flex;align-items:center;gap:26px;font-size:15px;color:var(--muted)}
   nav .links a:hover{color:var(--fg)}
-  .nav-cta{padding:9px 16px;font-size:14px;color:#fff}
-  @media(max-width:720px){nav .links a:not(.nav-cta){display:none}}
+  .nav-cta{padding:9px 16px;font-size:14px;color:#fff;border-radius:10px}
+  @media(max-width:760px){nav .links a:not(.nav-cta){display:none}}
 
-  /* hero */
-  .hero{position:relative;overflow:hidden;padding:80px 0 40px;
-    background:linear-gradient(180deg,#f4f8ff,#ffffff)}
+  /* ---- hero ---- */
+  .hero{position:relative;overflow:hidden;padding:72px 0 48px;
+    background:linear-gradient(180deg,#eff5ff,#ffffff)}
   .hero::before{content:"";position:absolute;inset:0;z-index:0;
-    background:radial-gradient(700px 380px at 22% 30%,rgba(37,99,235,.10),transparent 70%),
-               radial-gradient(600px 400px at 88% 10%,rgba(14,116,144,.07),transparent 70%)}
-  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-  .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-    color:var(--cyan);border:1px solid rgba(14,116,144,.3);background:rgba(14,116,144,.06);border-radius:999px;padding:5px 14px;margin-bottom:22px}
-  .hero h1{font-size:54px;font-weight:800;letter-spacing:-.5px}
+    background:radial-gradient(760px 420px at 20% 28%,rgba(37,99,235,.12),transparent 70%),
+               radial-gradient(640px 420px at 92% 6%,rgba(14,116,144,.08),transparent 70%)}
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.04fr .96fr;gap:44px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.6px;
+    color:var(--cyan);border:1px solid rgba(14,116,144,.28);background:rgba(14,116,144,.06);border-radius:999px;padding:6px 14px;margin-bottom:22px}
+  .hero h1{font-size:56px;font-weight:850;letter-spacing:-1px}
   .hero h1 .hl{color:var(--blue)}
-  .hero p.sub{font-size:20px;color:var(--muted);margin:22px 0 32px;max-width:32ch}
+  .hero p.sub{font-size:19.5px;color:var(--muted);margin:22px 0 30px;max-width:40ch}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .hero .tiny{color:var(--dim);font-size:14px;margin-top:18px}
-  .hero-shot{justify-self:center;max-width:330px;width:100%;border-radius:22px;
-    border:1px solid var(--edge);box-shadow:0 30px 70px -28px rgba(20,30,50,.32);background:#eef1f5}
-  @media(max-width:900px){
+  .hero .tiny{color:var(--dim);font-size:14px;margin-top:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .dot{width:5px;height:5px;border-radius:50%;background:var(--dim);display:inline-block}
+
+  /* phone mockup + video */
+  .stage{justify-self:center;position:relative}
+  .phone{width:300px;max-width:78vw;border:11px solid #0e1218;border-radius:40px;overflow:hidden;
+    box-shadow:var(--shadow-lg);background:#0e1218;position:relative}
+  .phone video{display:block;width:100%;height:auto}
+  .phone::after{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);
+    width:96px;height:6px;border-radius:6px;background:rgba(255,255,255,.18)}
+  .dro-chip{position:absolute;left:-26px;bottom:44px;z-index:3;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border:1px solid var(--edge);border-radius:14px;padding:11px 14px;
+    box-shadow:var(--shadow);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-width:172px}
+  .dro-chip .live{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--green);
+    letter-spacing:.5px;margin-bottom:8px;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
+  .blip{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(15,157,88,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,157,88,.5)}70%{box-shadow:0 0 0 7px rgba(15,157,88,0)}100%{box-shadow:0 0 0 0 rgba(15,157,88,0)}}
+  .dro-row{display:flex;justify-content:space-between;font-size:13px;color:var(--fg)}
+  .dro-row span:first-child{color:var(--dim)}
+  .badge-float{position:absolute;right:-18px;top:38px;z-index:3;background:#fff;border:1px solid var(--edge);
+    border-radius:12px;padding:10px 13px;box-shadow:var(--shadow);font-size:13px;font-weight:700;color:var(--fg);display:flex;align-items:center;gap:8px}
+  .badge-float .ico{font-size:16px}
+  @media(max-width:920px){
     .hero .wrap{grid-template-columns:1fr;text-align:center}
     .hero p.sub{margin-left:auto;margin-right:auto}
-    .hero .cta-row{justify-content:center}
+    .hero .cta-row,.hero .tiny{justify-content:center}
     .hero h1{font-size:40px}
-    .hero-shot{max-width:270px;order:-1}
+    .stage{order:-1;margin-bottom:10px}
+    .phone{width:250px}
+    .dro-chip{left:-10px}
   }
 
-  /* generic section */
-  section{padding:70px 0}
+  /* ---- compat strip ---- */
+  .compat{border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);background:var(--panel2)}
+  .compat .wrap{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap;justify-content:center;padding:20px 22px}
+  .compat .lbl{font-size:13px;font-weight:700;color:var(--dim);letter-spacing:.4px;text-transform:uppercase}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:var(--fg);
+    background:#fff;border:1px solid var(--edge);border-radius:999px;padding:7px 14px}
+  .pill b{color:var(--blue)}
+
+  /* ---- generic section ---- */
+  section{padding:76px 0}
   .kicker{color:var(--blue);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;font-size:13px;margin-bottom:12px}
-  .sec-title{font-size:34px;font-weight:800;letter-spacing:-.3px;max-width:20ch}
-  .sec-lead{color:var(--muted);font-size:18px;max-width:60ch;margin-top:14px}
+  .sec-title{font-size:36px;font-weight:850;letter-spacing:-.4px;max-width:22ch}
+  .sec-lead{color:var(--muted);font-size:18px;max-width:62ch;margin-top:14px}
+  .tint{background:var(--bg2);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
+  .center{text-align:center}
+  .center .sec-title,.center .sec-lead{margin-left:auto;margin-right:auto}
 
-  /* wedge band (light tinted) */
-  .wedge{background:var(--bg2);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
-  .wedge blockquote{margin:0;font-size:26px;font-weight:600;line-height:1.4;max-width:24ch;color:var(--fg)}
-  .wedge .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-  .wedge .old{color:var(--muted);font-size:17px}
-  .wedge .old b{color:var(--fg)}
-  @media(max-width:820px){.wedge .grid{grid-template-columns:1fr;gap:22px}.wedge blockquote{font-size:22px}}
+  /* ---- no-PC comparison ---- */
+  .nopc .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:start}
+  .nopc .stick{position:sticky;top:96px}
+  .nopc .phone{width:270px}
+  .cmp{width:100%;border-collapse:separate;border-spacing:0 10px}
+  .cmp caption{text-align:left;font-size:15px;color:var(--muted);margin-bottom:8px}
+  .cmp .r{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;
+    background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:15px 18px;margin-bottom:10px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  .cmp .r.head{background:transparent;border:0;box-shadow:none;padding:0 18px;margin-bottom:2px}
+  .cmp .r.head span{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--dim);text-align:center}
+  .cmp .r.head span:first-child{text-align:left}
+  .cmp .lab{font-weight:600;color:var(--fg);font-size:15.5px}
+  .col{width:88px;text-align:center;font-size:14px;font-weight:700}
+  .yes{color:var(--green)}.no{color:#c2410c}
+  .col small{display:block;font-weight:600;font-size:11px;color:var(--dim)}
+  @media(max-width:900px){.nopc .grid{grid-template-columns:1fr;gap:30px}.nopc .stick{position:static}.nopc .stage{justify-self:center}}
 
-  /* feature cards */
-  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-  .card{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:26px;transition:border-color .15s,transform .15s,box-shadow .15s;box-shadow:0 1px 2px rgba(20,30,50,.04)}
-  .card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:var(--shadow)}
-  .card .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;
-    font-size:22px;margin-bottom:16px;background:rgba(37,99,235,.10);border:1px solid rgba(37,99,235,.20)}
-  .card h3{font-size:19px;margin-bottom:8px}
-  .card p{color:var(--muted);font-size:15.5px;margin:0}
-  @media(max-width:820px){.feats{grid-template-columns:1fr}}
+  /* ---- numbered feature rows ---- */
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:34px 0}
+  .frow:nth-child(even) .fmedia{order:2}
+  .fnum{font-size:14px;font-weight:800;color:var(--blue);letter-spacing:2px;margin-bottom:10px}
+  .frow h3{font-size:27px;font-weight:800;letter-spacing:-.3px;margin-bottom:12px}
+  .frow p{color:var(--muted);font-size:16.5px;margin:0 0 14px}
+  .frow .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:600;color:var(--muted);background:var(--panel2);border:1px solid var(--edge);border-radius:8px;padding:5px 10px}
+  .fmedia{display:flex;justify-content:center}
+  .fmedia img{width:100%;max-width:300px;border-radius:22px;border:1px solid var(--edge);box-shadow:var(--shadow);background:#eef1f5}
+  .privacy0{display:flex;gap:14px;justify-content:center}
+  .zerocard{text-align:center;background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:20px 8px;flex:1;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  .zerocard .big{font-size:40px;font-weight:850;color:var(--fg);line-height:1}
+  .zerocard .cap{font-size:13px;color:var(--muted);margin-top:6px}
+  @media(max-width:860px){.frow{grid-template-columns:1fr;gap:22px;padding:26px 0}.frow:nth-child(even) .fmedia{order:0}.fmedia img{max-width:240px}}
 
-  /* connect */
-  .connect{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
-  .conn{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:26px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
-  .conn .tag{font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
-  .conn h3{font-size:20px;margin-bottom:8px}
-  .conn p{color:var(--muted);font-size:15px;margin:0}
-  @media(max-width:820px){.connect{grid-template-columns:1fr}}
+  /* ---- tabs ---- */
+  .tabs{display:inline-flex;gap:6px;background:var(--panel2);border:1px solid var(--edge);border-radius:14px;padding:6px;margin-top:28px}
+  .tab-btn{border:0;background:transparent;font:inherit;font-weight:700;font-size:15px;color:var(--muted);
+    padding:10px 20px;border-radius:10px;cursor:pointer;transition:all .15s}
+  .tab-btn.on{background:#fff;color:var(--blue);box-shadow:0 2px 8px -3px rgba(20,30,50,.2)}
+  .tab-panel{display:none;margin-top:26px;background:var(--panel);border:1px solid var(--edge);border-radius:18px;
+    padding:32px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  .tab-panel.on{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+  .tab-panel .ic{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;
+    background:rgba(37,99,235,.10);border:1px solid rgba(37,99,235,.20)}
+  .tab-panel h3{font-size:22px;margin-bottom:8px}
+  .tab-panel p{color:var(--muted);font-size:16px;margin:0}
+  .tab-panel .free{display:inline-block;margin-top:12px;font-size:12.5px;font-weight:700;color:var(--green);
+    background:rgba(15,157,88,.10);border:1px solid rgba(15,157,88,.25);border-radius:8px;padding:4px 10px}
+  @media(max-width:600px){.tab-panel.on{grid-template-columns:1fr;text-align:center}.tab-panel .ic{margin:0 auto}.tabs{display:flex;width:100%}.tab-btn{flex:1;padding:10px 8px;font-size:13.5px}}
 
-  /* gallery — dark app shots framed as devices on the light page */
-  .gallery{display:flex;gap:18px;overflow-x:auto;padding:8px 22px 24px;scroll-snap-type:x mandatory}
-  .gallery img{height:520px;border-radius:18px;border:1px solid var(--edge);scroll-snap-align:center;background:#eef1f5;box-shadow:var(--shadow)}
-  @media(max-width:600px){.gallery img{height:400px}}
-
-  /* video */
-  .video-wrap{max-width:340px;margin:36px auto 0;aspect-ratio:9/16;border-radius:20px;overflow:hidden;border:1px solid var(--edge);box-shadow:var(--shadow)}
+  /* ---- video ---- */
+  .video-wrap{max-width:330px;margin:34px auto 0;aspect-ratio:9/16;border-radius:22px;overflow:hidden;border:1px solid var(--edge);box-shadow:var(--shadow-lg)}
   .video-wrap iframe{width:100%;height:100%;border:0}
 
-  /* pricing */
-  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
-  .price{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  /* ---- trust ---- */
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  .tcard{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:26px;transition:transform .15s,box-shadow .15s,border-color .15s;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  .tcard:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--blue)}
+  .tcard .ic{font-size:24px;margin-bottom:12px}
+  .tcard h3{font-size:18px;margin-bottom:8px}
+  .tcard p{color:var(--muted);font-size:15px;margin:0}
+  .tcard a{color:var(--blue);font-weight:600}
+  .honest{margin-top:28px;text-align:center;color:var(--muted);font-size:15.5px;max-width:60ch;margin-left:auto;margin-right:auto}
+  @media(max-width:820px){.trust-grid{grid-template-columns:1fr}}
+
+  /* ---- pricing ---- */
+  .freecore{background:var(--panel);border:1px solid var(--edge);border-radius:18px;padding:26px 28px;margin-top:36px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  .freecore h3{font-size:20px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .freecore .tag{font-size:12px;font-weight:800;color:var(--green);background:rgba(15,157,88,.10);border:1px solid rgba(15,157,88,.25);border-radius:8px;padding:3px 9px}
+  .freecore p{color:var(--muted);margin:0;font-size:15.5px}
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+  .price{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(20,30,50,.04);transition:transform .15s,box-shadow .15s,border-color .15s}
+  .price:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--blue)}
   .price h3{font-size:17px;margin-bottom:4px}
-  .price .amt{font-size:26px;font-weight:800;margin:8px 0 2px;color:var(--fg)}
-  .price .amt small{font-size:13px;color:var(--dim);font-weight:600}
-  .price p{color:var(--muted);font-size:14px;margin:0}
-  .price.bundle{border-color:var(--blue);background:linear-gradient(180deg,#eef4ff,var(--panel));box-shadow:var(--shadow)}
-  .price .badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
-    color:var(--blue);background:rgba(37,99,235,.12);border-radius:6px;padding:2px 8px;margin-bottom:8px}
-  .price-note{color:var(--dim);font-size:14px;margin-top:20px;text-align:center}
-  @media(max-width:820px){.price-grid{grid-template-columns:1fr 1fr}}
+  .price .amt{font-size:26px;font-weight:850;margin:8px 0 2px;color:var(--fg)}
+  .price p{color:var(--muted);font-size:14px;margin:0 0 12px}
+  .price .sim{font-size:12px;font-weight:600;color:var(--green)}
+  .bundle-row{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px;align-items:stretch}
+  .bundle{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;border-radius:16px;padding:26px 28px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;justify-content:center}
+  .bundle .badge{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;background:rgba(255,255,255,.2);border-radius:6px;padding:3px 9px;margin-bottom:10px}
+  .bundle h3{color:#fff;font-size:22px}
+  .bundle .anchor{margin:10px 0 4px;font-size:15px;color:rgba(255,255,255,.82)}
+  .bundle .anchor s{opacity:.8}
+  .bundle .amt{font-size:34px;font-weight:850}
+  .bundle .save{font-size:14px;font-weight:700;color:#bbf7d0}
+  .nosub{background:var(--panel);border:1px dashed var(--edge);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+  .nosub .b{font-size:20px;font-weight:800;color:var(--fg)}
+  .nosub p{color:var(--muted);font-size:14.5px;margin:8px 0 0}
+  .price-note{color:var(--dim);font-size:14px;margin-top:20px;text-align:center;max-width:70ch;margin-left:auto;margin-right:auto}
+  @media(max-width:820px){.price-grid{grid-template-columns:1fr 1fr}.bundle-row{grid-template-columns:1fr}}
   @media(max-width:480px){.price-grid{grid-template-columns:1fr}}
 
-  /* faq */
-  .faq{max-width:760px;margin:36px auto 0}
-  details{border-bottom:1px solid var(--edge);padding:18px 0}
-  summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--fg)}
+  /* ---- faq ---- */
+  .faq{max-width:780px;margin:36px auto 0}
+  details{border:1px solid var(--edge);border-radius:14px;padding:0 20px;margin-bottom:12px;background:var(--panel);overflow:hidden}
+  summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--fg);padding:18px 0}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";color:var(--blue);font-weight:700;font-size:22px;line-height:1}
   details[open] summary::after{content:"–"}
-  details p{color:var(--muted);margin:12px 0 0;font-size:15.5px}
+  details p{color:var(--muted);margin:0 0 18px;font-size:15.5px}
 
-  /* final cta */
-  .final{text-align:center;background:linear-gradient(180deg,var(--bg2),var(--bg));border-top:1px solid var(--edge)}
-  .final h2{font-size:38px;font-weight:800}
-  .final p{color:var(--muted);font-size:19px;margin:16px auto 30px;max-width:44ch}
-
+  /* ---- final + footer ---- */
+  .final{text-align:center;background:linear-gradient(180deg,#eff5ff,#ffffff);border-top:1px solid var(--edge)}
+  .final h2{font-size:40px;font-weight:850;letter-spacing:-.5px}
+  .final p{color:var(--muted);font-size:19px;margin:16px auto 30px;max-width:46ch}
+  .safety{color:var(--dim);font-size:13px;max-width:72ch;margin:26px auto 0;text-align:center;line-height:1.5}
   footer{border-top:1px solid var(--edge);padding:34px 0;color:var(--dim);font-size:14px;background:var(--bg2)}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
-  footer .brand{color:var(--fg)}
+  footer .brand{color:var(--fg);font-size:17px}
   footer a{color:var(--muted)}footer a:hover{color:var(--fg)}
-  .safety{color:var(--dim);font-size:13px;max-width:70ch;margin:10px auto 0;text-align:center;line-height:1.5}
 </style>
 </head>
 <body>
@@ -189,116 +271,270 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <header class="hero" id="top">
   <div class="wrap">
     <div>
-      <span class="eyebrow">The mobile CNC sender</span>
-      <h1>Run your CNC router from <span class="hl">your phone</span>.</h1>
-      <p class="sub">Every serious GRBL sender is chained to a laptop. Gantry lives in your pocket — live position, thumb jog, G-code streaming and live 3D, with no PC at the machine.</p>
+      <span class="eyebrow">GRBL · grblHAL · FluidNC — the mobile CNC sender</span>
+      <h1>Your CNC router, run from <span class="hl">your pocket</span>.</h1>
+      <p class="sub">Every serious GRBL sender is chained to a laptop. Gantry turns your phone or tablet into a wireless pendant — live DRO, thumb jog, G-code streaming and live 3D — wired straight to the controller, with no PC at the machine.</p>
       <div class="cta-row">
-        <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.cnccontrol.app&referrer=utm_source%3Dsite%26utm_medium%3Dhero" rel="noopener"><span class="tri"></span>Free on Google Play</a>
-        <a class="btn btn-ghost" href="#video">Watch the 45s demo</a>
+        <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.cnccontrol.app&referrer=utm_source%3Dsite%26utm_medium%3Dhero" rel="noopener">
+          <span class="pmark">▶</span><span class="gplay"><small>GET IT FREE ON</small><b>Google Play</b></span>
+        </a>
+        <a class="btn btn-ghost" href="#video">Watch it work (30s)</a>
       </div>
-      <p class="tiny">No account · no ads · no tracking · built-in simulator — try it with no machine.</p>
+      <p class="tiny">No account <span class="dot"></span> no ads <span class="dot"></span> no tracking <span class="dot"></span> full simulator — try every feature with no machine.</p>
     </div>
-    <img class="hero-shot" src="img/light-hero.png" alt="Gantry dashboard showing live DRO, jog pad and a 3D toolpath — light theme">
+    <div class="stage">
+      <div class="phone">
+        <video autoplay muted loop playsinline poster="video/poster.jpg" preload="metadata">
+          <source src="video/gantry-demo.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="dro-chip" aria-hidden="true">
+        <div class="live"><span class="blip"></span> LIVE · RUN</div>
+        <div class="dro-row"><span>X</span><span id="dx">42.318</span></div>
+        <div class="dro-row"><span>Y</span><span id="dy">118.902</span></div>
+        <div class="dro-row"><span>Z</span><span id="dz">-3.500</span></div>
+        <div class="dro-row"><span>F</span><span id="df">1200</span></div>
+      </div>
+      <div class="badge-float" aria-hidden="true"><span class="ico">🔌</span> No PC needed</div>
+    </div>
   </div>
 </header>
 
-<!-- WEDGE -->
-<section class="wedge">
+<!-- COMPAT STRIP -->
+<div class="compat reveal">
+  <div class="wrap">
+    <span class="lbl">Works with</span>
+    <span class="pill"><b>GRBL</b> 1.1</span>
+    <span class="pill"><b>grblHAL</b></span>
+    <span class="pill"><b>FluidNC</b></span>
+    <span class="pill">USB-OTG</span>
+    <span class="pill">Bluetooth</span>
+    <span class="pill">Wi-Fi</span>
+    <span class="pill">Shapeoko · X-Carve · OpenBuilds · MPCNC · home-built</span>
+  </div>
+</div>
+
+<!-- NO-PC COMPARISON -->
+<section class="nopc" id="nopc">
   <div class="wrap grid">
-    <blockquote>Leave the mouse-on-a-stool at the desk.</blockquote>
-    <div class="old">
-      <p><b>gSender, UGS, OpenBuilds Control, CNCjs, bCNC</b> — every good GRBL sender runs on a laptop wired to the machine. That means a computer living in the sawdust just to jog an axis or babysit a job.</p>
-      <p>Gantry owns the axis they can't follow onto: <b>phone-first, and direct-connect with no PC at all.</b> Think of it as the companion that frees your hands — not a desktop replacement.</p>
+    <div class="stick">
+      <div class="stage" style="justify-self:start">
+        <div class="phone reveal"><video autoplay muted loop playsinline poster="video/poster.jpg" preload="none"><source src="video/gantry-demo.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <div>
+      <div class="kicker reveal">The wedge</div>
+      <h2 class="sec-title reveal">Every desktop sender needs a computer at the machine. Gantry doesn't.</h2>
+      <p class="sec-lead reveal">gSender, UGS, OpenBuilds Control, CNCjs, bCNC — all brilliant, all tethered to a laptop or Raspberry Pi wired to the controller. Even their "phone" modes are just a browser window onto that computer. Gantry <b>is</b> the sender: plug your phone straight into the board over USB, or pair over Bluetooth. Nothing on the bench.</p>
+      <div class="cmp reveal" role="table" aria-label="Setup comparison">
+        <div class="r head"><span>The usual setup</span><span>Desktop&nbsp;senders</span><span>Gantry</span></div>
+        <div class="r"><span class="lab">A laptop or Pi wired to the machine</span><span class="col no">Required</span><span class="col yes">None</span></div>
+        <div class="r"><span class="lab">Direct USB / Bluetooth from the phone</span><span class="col no">✗</span><span class="col yes">✓</span></div>
+        <div class="r"><span class="lab">Runs with no network at all</span><span class="col"><small>varies</small></span><span class="col yes">✓</span></div>
+        <div class="r"><span class="lab">The screen walks to the machine with you</span><span class="col no">✗</span><span class="col yes">✓</span></div>
+        <div class="r"><span class="lab">Wi-Fi option if you prefer a shop PC</span><span class="col yes">✓</span><span class="col yes">✓</span></div>
+      </div>
+      <p style="margin-top:22px" class="reveal">
+        <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.cnccontrol.app&referrer=utm_source%3Dsite%26utm_medium%3Dnopc" rel="noopener"><span class="pmark">▶</span><span class="gplay"><small>GET IT FREE ON</small><b>Google Play</b></span></a>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features">
+<!-- NUMBERED FEATURES -->
+<section id="features" class="tint">
   <div class="wrap">
-    <div class="kicker">What it does</div>
-    <h2 class="sec-title">Real machine control, in your palm.</h2>
-    <div class="feats">
-      <div class="card"><div class="ic">🎯</div><h3>Live DRO &amp; jog</h3><p>Machine and work coordinates, feed, spindle and state in real time. Thumb XY pad plus Z, with selectable step and feed. Home and zero from across the shop.</p></div>
-      <div class="card"><div class="ic">🧊</div><h3>Live 3D toolpath</h3><p>Load a G-code file and watch the cut render as it runs — rapids and cuts colour-coded, the tool head moving with the machine. Pan, zoom, rotate.</p></div>
-      <div class="card"><div class="ic">🔌</div><h3>No PC needed</h3><p>Plug the controller straight into your phone over USB-OTG, or pair over Bluetooth. Your phone is the pendant <em>and</em> the sender — backend-less.</p></div>
-      <div class="card"><div class="ic">↩️</div><h3>Never lose a job</h3><p>Power blip or dropped link? Run-from-line recovery resumes from any line with a safe re-entry. Plus auto-reconnect, keep-awake and pre-flight checks.</p></div>
-      <div class="card"><div class="ic">📐</div><h3>Probing &amp; feeds</h3><p>Z touch-plate, edge, corner, hole-centre and auto-levelling height maps. A material-aware feeds &amp; speeds calculator and a surfacing wizard.</p></div>
-      <div class="card"><div class="ic">🔒</div><h3>Genuinely private</h3><p>No account, no ads, no tracking, no cloud. The app only talks to the controller or server you point it at. The anti-SaaS tool.</p></div>
+    <div class="kicker reveal">What it does</div>
+    <h2 class="sec-title reveal">Real machine control, in your palm.</h2>
+
+    <div class="frow reveal">
+      <div>
+        <div class="fnum">01 — JOG &amp; DRO</div>
+        <h3>Live position, thumb jog, from across the shop.</h3>
+        <p>Machine and work coordinates, feed, spindle and state in real time. A thumb XY pad plus Z, with selectable step and feed. Home and zero without walking back to a screen.</p>
+        <div class="chips"><span class="chip">Selectable step</span><span class="chip">Work + machine coords</span><span class="chip">Home / zero</span></div>
+      </div>
+      <div class="fmedia"><img src="img/light-jog.png" alt="Thumb jog pad with selectable step and feed"></div>
+    </div>
+
+    <div class="frow reveal">
+      <div>
+        <div class="fnum">02 — LIVE 3D</div>
+        <h3>Watch the cut render as it runs.</h3>
+        <p>Load a G-code file and see the toolpath draw live — rapids and cuts colour-coded, the tool head moving with the machine. Pan, zoom and rotate while the job streams.</p>
+        <div class="chips"><span class="chip">Real-time toolpath</span><span class="chip">Colour-coded moves</span><span class="chip">Pan / zoom / rotate</span></div>
+      </div>
+      <div class="fmedia"><img src="img/light-3d.png" alt="Live 3D toolpath — the completed cut rendered on the bed"></div>
+    </div>
+
+    <div class="frow reveal">
+      <div>
+        <div class="fnum">03 — DIRECT CONNECT</div>
+        <h3>No PC. The phone is the pendant and the sender.</h3>
+        <p>Plug the controller straight into your phone over USB-OTG, or pair over Bluetooth (classic or BLE). No backend, no server, nothing living in the sawdust — just the phone and the machine.</p>
+        <div class="chips"><span class="chip">USB-OTG</span><span class="chip">Bluetooth SPP / BLE</span><span class="chip">Backend-less</span></div>
+      </div>
+      <div class="fmedia"><img src="img/light-connect.png" alt="Connected to a GRBL controller — link up, firmware detected"></div>
+    </div>
+
+    <div class="frow reveal">
+      <div>
+        <div class="fnum">04 — RECOVERY</div>
+        <h3>Never lose a job to a power blip.</h3>
+        <p>Dropped link or a flicker on the mains? Run-from-line recovery resumes from any line with a safe re-entry — retract, rapid to position, ease back into the cut. Plus auto-reconnect, keep-awake and pre-flight checks.</p>
+        <div class="chips"><span class="chip">Run-from-line</span><span class="chip">Auto-reconnect</span><span class="chip">Keep-awake</span></div>
+      </div>
+      <div class="fmedia"><img src="img/light-dashboard.png" alt="Gantry dashboard mid-job with live status"></div>
+    </div>
+
+    <div class="frow reveal">
+      <div>
+        <div class="fnum">05 — PRECISION</div>
+        <h3>Probing, tool changes and surface maps.</h3>
+        <p>Z touch-plate, edge, corner and hole-centre probing, an M6 tool-change workflow, and auto-levelling height maps for uneven stock. A material-aware feeds &amp; speeds calculator and a surfacing wizard round it out.</p>
+        <div class="chips"><span class="chip">Touch-plate + probing</span><span class="chip">Auto-level height map</span><span class="chip">Feeds &amp; speeds</span></div>
+      </div>
+      <div class="fmedia"><img src="img/light-dro.png" alt="Live DRO — machine and work coordinates"></div>
+    </div>
+
+    <div class="frow reveal">
+      <div>
+        <div class="fnum">06 — PRIVATE BY DESIGN</div>
+        <h3>The anti-SaaS tool.</h3>
+        <p>No account, no ads, no tracking, no cloud. The app only ever talks to the controller or the server you point it at. Nothing phones home — check the permissions yourself before you install.</p>
+        <div class="chips"><span class="chip">No account</span><span class="chip">No analytics SDK</span><span class="chip">Open privacy policy</span></div>
+      </div>
+      <div class="fmedia">
+        <div class="privacy0" style="width:100%;max-width:340px">
+          <div class="zerocard"><div class="big">0</div><div class="cap">accounts</div></div>
+          <div class="zerocard"><div class="big">0</div><div class="cap">ads</div></div>
+          <div class="zerocard"><div class="big">0</div><div class="cap">trackers</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CONNECT -->
-<section id="connect" class="wedge">
-  <div class="wrap">
-    <div class="kicker">Two ways to connect</div>
-    <h2 class="sec-title">Wire it up however your shop is set up.</h2>
-    <div class="connect">
-      <div class="conn"><div class="tag">Direct</div><h3>Straight to the controller</h3><p>USB-OTG cable or Bluetooth (classic or BLE) from phone to controller. No PC, no network — just the phone and the machine.</p></div>
-      <div class="conn"><div class="tag">Networked</div><h3>Over Wi-Fi</h3><p>Run the free Gantry server on the PC wired to your machine and control or monitor from anywhere in the shop.</p></div>
-      <div class="conn"><div class="tag">Simulator</div><h3>Try with no hardware</h3><p>A built-in GRBL simulator runs every feature — jog, stream, 3D, recovery — with nothing plugged in. Great for a first look.</p></div>
+<!-- CONNECT TABS -->
+<section id="connect">
+  <div class="wrap center">
+    <div class="kicker reveal">Three ways to connect</div>
+    <h2 class="sec-title reveal">Wire it up however your shop is set up.</h2>
+    <p class="sec-lead reveal">Direct is the wedge — but the same app does Wi-Fi and a full offline simulator too.</p>
+    <div style="display:flex;justify-content:center">
+      <div class="tabs reveal" role="tablist">
+        <button class="tab-btn on" data-tab="direct" role="tab">Direct · no PC</button>
+        <button class="tab-btn" data-tab="net" role="tab">Networked</button>
+        <button class="tab-btn" data-tab="sim" role="tab">Simulator</button>
+      </div>
     </div>
-    <p class="sec-lead" style="margin-top:26px">Works with <b>GRBL 1.1</b>, <b>grblHAL</b> and <b>FluidNC</b> controllers — the standard GRBL path. Shapeoko, X-Carve, OpenBuilds LEAD, MPCNC, LowRider and home-built rigs.</p>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section>
-  <div class="wrap">
-    <div class="kicker">See it</div>
-    <h2 class="sec-title">A modern sender that happens to fit in your pocket.</h2>
-  </div>
-  <div class="gallery">
-    <img src="img/light-3d.png" alt="Live 3D toolpath — the completed cut rendered on the bed">
-    <img src="img/light-connect.png" alt="Connected to a GRBL controller — link up, firmware detected">
-    <img src="img/light-jog.png" alt="Thumb jog pad with selectable step and feed">
-    <img src="img/light-dro.png" alt="Live DRO — machine and work coordinates">
+    <div style="max-width:760px;margin:0 auto;text-align:left">
+      <div class="tab-panel on" data-panel="direct">
+        <div class="ic">🔌</div>
+        <div>
+          <h3>Straight to the controller</h3>
+          <p>A USB-OTG cable or Bluetooth (classic SPP or BLE) from phone to controller. No PC, no network — just the phone and the machine. This is the setup no desktop sender can match.</p>
+        </div>
+      </div>
+      <div class="tab-panel" data-panel="net">
+        <div class="ic">📡</div>
+        <div>
+          <h3>Over Wi-Fi</h3>
+          <p>Prefer to keep a shop PC in the loop? Run the free Gantry server on the machine's computer and control or monitor from anywhere on the network — same app, same interface.</p>
+        </div>
+      </div>
+      <div class="tab-panel" data-panel="sim">
+        <div class="ic">🧪</div>
+        <div>
+          <h3>Try with no hardware</h3>
+          <p>A built-in GRBL simulator runs every feature — jog, stream a real job, watch the live 3D, test recovery — with nothing plugged in. The honest way to evaluate it before you go near your machine.</p>
+          <span class="free">Free · no machine, no purchase, no risk</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- VIDEO -->
-<section id="video" class="wedge">
-  <div class="wrap" style="text-align:center">
-    <div class="kicker">45-second demo</div>
-    <h2 class="sec-title" style="margin:0 auto">Phone in one hand. CNC in the other.</h2>
-    <div class="video-wrap">
+<section id="video" class="tint">
+  <div class="wrap center">
+    <div class="kicker reveal">See the full demo</div>
+    <h2 class="sec-title reveal">Phone in one hand. CNC in the other.</h2>
+    <div class="video-wrap reveal">
       <iframe src="https://www.youtube.com/embed/FZUnTXFNYCk" title="Gantry demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="wrap">
-    <div class="kicker">Fair pricing</div>
-    <h2 class="sec-title">Free to use. Buy once for the extras.</h2>
-    <p class="sec-lead">Core control, monitoring, the 3D viewer, the simulator and the plain-English alarm decoder are free forever, with no account. Add only the packs you want — one-time in-app purchases, <b>no subscription</b>.</p>
-    <div class="price-grid">
-      <div class="price"><h3>Connect</h3><div class="amt">$4.99</div><p>Connect any machine, any way — direct USB/Bluetooth &amp; networking.</p></div>
-      <div class="price"><h3>Precision</h3><div class="amt">$5.99</div><p>Probing, tool changes &amp; surface mapping.</p></div>
-      <div class="price"><h3>Design</h3><div class="amt">$6.99</div><p>Turn art &amp; vectors into engraving or 2.5D relief toolpaths.</p></div>
-      <div class="price bundle"><span class="badge">Best value</span><h3>All Access</h3><div class="amt">Bundle</div><p>Every pack, one purchase. The whole shop.</p></div>
+<!-- TRUST -->
+<section id="trust">
+  <div class="wrap center">
+    <div class="kicker reveal">Why trust it near your machine</div>
+    <h2 class="sec-title reveal">Built on what you already run.</h2>
+    <div class="trust-grid" style="text-align:left">
+      <div class="tcard reveal"><div class="ic">⚙️</div><h3>Standard GRBL, nothing exotic</h3><p>Same G-code, same limit-switch and soft-limit behaviour, same real-time overrides you already trust — over GRBL 1.1, grblHAL and FluidNC. Gantry speaks the protocol, it doesn't reinvent it.</p></div>
+      <div class="tcard reveal"><div class="ic">🧪</div><h3>Verify it yourself first</h3><p>The full simulator runs every feature with no hardware. Test jogging, streaming, recovery and the 3D view before you connect anything — then decide.</p></div>
+      <div class="tcard reveal"><div class="ic">🔎</div><h3>Nothing to hide</h3><p>No analytics SDK, no account, no ads. The <a href="https://sherypanesar.github.io/gantry-legal/" rel="noopener">privacy policy</a> is plain English, and you can inspect the app's permissions on Google Play before installing.</p></div>
     </div>
-    <p class="price-note">Also available: Pro Shop pack (batch mode, gamepad jog, custom materials, extra themes) — $5.99. The plain-English alarm decoder is always free, because safety shouldn't be paywalled.</p>
+    <p class="honest reveal">No fake review counts or "trusted by thousands" here — Gantry is new on Google Play, and we'd rather earn it. It's free, the simulator proves everything, and real reviews will speak for themselves.</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="tint">
+  <div class="wrap center">
+    <div class="kicker reveal">Fair pricing</div>
+    <h2 class="sec-title reveal">The free app is the full app.</h2>
+    <p class="sec-lead reveal">Nothing is crippled to sell you the rest. Packs add depth — they don't unlock the basics.</p>
+  </div>
+  <div class="wrap" style="text-align:left">
+    <div class="freecore reveal">
+      <h3><span class="tag">FREE FOREVER</span> The core control loop, no account, no catch</h3>
+      <p>USB &amp; simulator connect · live DRO · thumb jog · homing &amp; zeroing · load and run a job · live 3D viewer · console &amp; event log · real-time overrides · and the plain-English <b>alarm decoder</b> — always free, because safety shouldn't be paywalled.</p>
+    </div>
+
+    <div class="price-grid">
+      <div class="price reveal"><h3>Connect</h3><div class="amt">$4.99</div><p>Networking &amp; Bluetooth links, plus grblHAL / FluidNC multi-controller support.</p><span class="sim">✓ Try free in the simulator</span></div>
+      <div class="price reveal"><h3>Precision</h3><div class="amt">$5.99</div><p>Probing cycles, M6 tool changes, auto-level height maps and custom macros.</p><span class="sim">✓ Try free in the simulator</span></div>
+      <div class="price reveal"><h3>Design</h3><div class="amt">$6.99</div><p>Image &amp; vector → G-code (outline, V-bit, 2.5D relief) and webcam edge-finding with AR overlay.</p><span class="sim">✓ Try free in the simulator</span></div>
+      <div class="price reveal"><h3>Pro Shop</h3><div class="amt">$5.99</div><p>Feeds &amp; speeds, batch mode, gamepad jog, unlimited profiles, extra themes and $$ settings manager.</p><span class="sim">✓ Try free in the simulator</span></div>
+    </div>
+
+    <div class="bundle-row">
+      <div class="bundle reveal">
+        <span class="badge">Best value</span>
+        <h3>All Access</h3>
+        <div class="anchor">Every pack. <s>$23.96</s> bought separately</div>
+        <div class="amt">$16.99</div>
+        <div class="save">One purchase — you save $6.97</div>
+      </div>
+      <div class="nosub reveal">
+        <div class="b">Buy once. Yours forever.</div>
+        <p>Every pack is a one-time purchase through Google Play. <b>No subscription, ever</b> — and the standard Play Store refund window applies.</p>
+      </div>
+    </div>
+    <p class="price-note reveal">Prices shown in USD; Google Play converts to your local currency at checkout. Try any pack's behaviour free in the simulator before you spend a cent.</p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="wedge">
+<section id="faq">
+  <div class="wrap center">
+    <div class="kicker reveal">Questions</div>
+    <h2 class="sec-title reveal">Good to know</h2>
+  </div>
   <div class="wrap">
-    <div class="kicker" style="text-align:center">Questions</div>
-    <h2 class="sec-title" style="margin:0 auto;text-align:center">Good to know</h2>
     <div class="faq">
-      <details><summary>Do I need a computer at the machine?</summary><p>No. With direct-connect you plug the controller into your phone over USB-OTG or pair over Bluetooth, and the phone is both the pendant and the G-code sender — nothing else on the bench. If you prefer, you can also run the free Gantry server on a shop PC and connect over Wi-Fi.</p></details>
-      <details><summary>Which machines and firmware are supported?</summary><p>Any controller on the standard GRBL path: GRBL 1.1, grblHAL and FluidNC. That covers Shapeoko, X-Carve, OpenBuilds LEAD/1010, MPCNC, LowRider and most home-built GRBL routers and lasers.</p></details>
-      <details><summary>Is it really free?</summary><p>Yes — core control, monitoring, the live 3D viewer, the built-in simulator and the alarm decoder cost nothing and need no account. Advanced features come as optional one-time in-app purchases. There is no subscription.</p></details>
-      <details><summary>What data does Gantry collect?</summary><p>None for the developer. No account, no ads, no analytics, no tracking. The app only communicates with the controller or the server you connect it to.</p></details>
-      <details><summary>Can I try it before setting anything up?</summary><p>Yes. The built-in GRBL simulator runs every feature with no hardware attached, so you can jog, stream a job, watch the 3D view and test recovery straight after installing.</p></details>
-      <details><summary>Is it safe to run a CNC from a phone?</summary><p>A CNC machine is powerful and can cause injury regardless of what controls it. Gantry follows safe-machining practice — pre-flight checks, an always-visible state and emergency-stop — but you should always keep clear of the machine, know where your e-stop is, and never leave a running job unattended.</p></details>
+      <details class="reveal"><summary>Do I need a computer at the machine?</summary><p>No. With direct-connect you plug the controller into your phone over USB-OTG or pair over Bluetooth, and the phone is both the pendant and the G-code sender — nothing else on the bench. If you prefer, you can also run the free Gantry server on a shop PC and connect over Wi-Fi.</p></details>
+      <details class="reveal"><summary>Which machines and firmware are supported?</summary><p>Any controller on the standard GRBL path: GRBL 1.1, grblHAL and FluidNC. That covers Shapeoko, X-Carve, OpenBuilds LEAD/1010, MPCNC, LowRider and most home-built GRBL routers and lasers.</p></details>
+      <details class="reveal"><summary>Is it really free?</summary><p>Yes — core control, monitoring, the live 3D viewer, the built-in simulator and the alarm decoder cost nothing and need no account. Advanced features come as optional one-time in-app purchases. There is no subscription.</p></details>
+      <details class="reveal"><summary>Can I try a paid pack before buying it?</summary><p>Yes. Every pack's behaviour runs in the built-in simulator with no machine and no purchase, so you can see exactly what it does before deciding. Purchases are one-time and yours forever.</p></details>
+      <details class="reveal"><summary>What data does Gantry collect?</summary><p>None for the developer. No account, no ads, no analytics, no tracking. The app only communicates with the controller or the server you connect it to. The privacy policy is public and you can inspect permissions on Google Play.</p></details>
+      <details class="reveal"><summary>Is it safe to run a CNC from a phone?</summary><p>A CNC machine is powerful and can cause injury regardless of what controls it. Gantry follows safe-machining practice — pre-flight checks, an always-visible state and emergency-stop — but you should always keep clear of the machine, know where your e-stop is, and never leave a running job unattended.</p></details>
     </div>
   </div>
 </section>
@@ -306,16 +542,16 @@
 <!-- FINAL CTA -->
 <section class="final">
   <div class="wrap">
-    <h2>Untether from the laptop.</h2>
-    <p>Install Gantry and jog your machine from your phone in the next five minutes — with the simulator, you don't even need it plugged in.</p>
-    <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.cnccontrol.app&referrer=utm_source%3Dsite%26utm_medium%3Dfooter" rel="noopener"><span class="tri"></span>Free on Google Play</a>
+    <h2 class="reveal">Untether from the laptop.</h2>
+    <p class="reveal">Install Gantry and jog your machine from your phone in the next five minutes — with the simulator, you don't even need it plugged in.</p>
+    <a class="btn btn-play reveal" href="https://play.google.com/store/apps/details?id=com.cnccontrol.app&referrer=utm_source%3Dsite%26utm_medium%3Dfooter" rel="noopener"><span class="pmark">▶</span><span class="gplay"><small>GET IT FREE ON</small><b>Google Play</b></span></a>
     <p class="safety">Safety: a CNC machine can cause serious injury. Always follow safe machining practice, keep clear of the machine, know where your emergency stop is, and never leave a running job unattended.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div class="brand" style="font-size:17px"><img src="img/icon.png" alt="" style="width:26px;height:26px">Gantry</div>
+    <div class="brand"><img src="img/icon.png" alt="" style="width:26px;height:26px;border-radius:7px;vertical-align:middle;margin-right:8px">Gantry</div>
     <div style="display:flex;gap:24px;flex-wrap:wrap">
       <a href="https://play.google.com/store/apps/details?id=com.cnccontrol.app" rel="noopener">Google Play</a>
       <a href="blog/index.html">Guides</a>
@@ -325,6 +561,49 @@
     <div>© 2026 Gantry</div>
   </div>
 </footer>
+
+<script>
+  // ---- scroll reveal ----
+  (function(){
+    var els=[].slice.call(document.querySelectorAll('.reveal'));
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e)});
+  })();
+
+  // ---- connection tabs ----
+  (function(){
+    var btns=[].slice.call(document.querySelectorAll('.tab-btn'));
+    var panels=[].slice.call(document.querySelectorAll('.tab-panel'));
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){
+        btns.forEach(function(x){x.classList.remove('on')});
+        panels.forEach(function(p){p.classList.remove('on')});
+        b.classList.add('on');
+        var t=b.getAttribute('data-tab');
+        var panel=document.querySelector('.tab-panel[data-panel="'+t+'"]');
+        if(panel)panel.classList.add('on');
+      });
+    });
+  })();
+
+  // ---- live DRO ticker (atmospheric, represents a running job) ----
+  (function(){
+    var x=42.318,y=118.902,z=-3.5, dirx=1,diry=1;
+    var ex=document.getElementById('dx'),ey=document.getElementById('dy'),ez=document.getElementById('dz'),ef=document.getElementById('df');
+    if(!ex)return;
+    function step(){
+      x+=dirx*(Math.random()*0.9+0.2); y+=diry*(Math.random()*0.7+0.15);
+      if(x>96){dirx=-1}if(x<12){dirx=1} if(y>140){diry=-1}if(y<40){diry=1}
+      z=-3.5+(Math.random()*0.06-0.03);
+      ex.textContent=x.toFixed(3); ey.textContent=y.toFixed(3); ez.textContent=z.toFixed(3);
+      ef.textContent=(1150+Math.round(Math.random()*100));
+    }
+    setInterval(step,700);
+  })();
+</script>
 
 </body>
 </html>
