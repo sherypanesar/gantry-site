@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://gantrycnc.com/</loc><lastmod>2026-07-27</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://gantrycnc.com/blog/</loc><lastmod>2026-07-27</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gantrycnc.com/blog/control-grbl-cnc-from-your-phone.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gantrycnc.com/blog/running-cnc-without-a-laptop.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gantrycnc.com/blog/gsender-mobile-companion.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gantrycnc.com/blog/recover-cnc-job-after-power-failure.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>
